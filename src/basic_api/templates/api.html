@@ -1,0 +1,77 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>API Documentation</title>
+    <link rel="stylesheet" href="/static/styles/default.css">
+</head>
+<body>
+    <h1>API Documentation</h1>
+
+    <h2>Endpoints</h2>
+    <ul>
+        <li>
+            <h3>GET /api/sum</h3>
+            <p>Gets the sum of two numbers.</p>
+            <h4>Parameters</h4>
+            <table>
+                <tr>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td>a</td>
+                    <td>number</td>
+                    <td>The first number.</td>
+                </tr>
+                <tr>
+                    <td>b</td>
+                    <td>number</td>
+                    <td>The second number.</td>
+                </tr>
+            </table>
+        </li>
+    </ul>
+
+    <h2>Request Headers</h2>
+    <table>
+        <tr>
+            <th>Header</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td>Authorization</td>
+            <td>Bearer token for authentication.</td>
+        </tr>
+    </table>
+
+    <h2>Response Codes</h2>
+    <table>
+        <tr>
+            <th>Code</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td>200</td>
+            <td>OK - The request was successful.</td>
+        </tr>
+        <tr>
+            <td>400</td>
+            <td>Bad Request - The request was invalid or missing required parameters.</td>
+        </tr>
+        <tr>
+            <td>401</td>
+            <td>Unauthorized - The request requires authentication.</td>
+        </tr>
+        <tr>
+            <td>404</td>
+            <td>Not Found - The requested resource was not found.</td>
+        </tr>
+        <tr>
+            <td>500</td>
+            <td>Internal Server Error - An unexpected error occurred on the server.</td>
+        </tr>
+    </table>
+</body>
+</html>

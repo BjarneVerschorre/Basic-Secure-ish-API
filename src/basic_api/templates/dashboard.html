@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/styles/default.css">
+    <title>Dashboard</title>
+</head>
+
+<body>
+    <h1>Dashboard</h1>
+    <h1>Hello @{{username}}</h1>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <ul class=flashes>
+        {% for category, message in messages %}
+        <li class="{{ category }}">{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+    {% if api_keys %}
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Created at</th>
+            <th>Action</th>
+        </tr>
+        
+        {% for api_key in api_keys %}
+        <tr>
+            <td>{{api_key.name}}</td>
+            <td>{{api_key.created_at}}</td>
+            <td>
+                <form action="/api/revoke/{{api_key.id}}" method="POST" style="margin-bottom: 0px;">
+                    <input type="hidden" name="csrf_token" value="{{csrf_token()}}">
+                    <input type="submit" value="Revoke">
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+
+    </table>
+    {% else %}
+    <p>You don't have an API Key yet.</p>
+    <form action="/api/generate-key" method="POST">
+        {{ form.hidden_tag() }}
+        {{ form.name(size=20, pattern="^[a-zA-Z0-9_]{3,25}$", placeholder="API Key Name") }}
+        {% for error in form.name.errors %}
+            <span style="color: red;">{{ error }}</span>
+        {% endfor %}
+        {{ form.submit }}
+    </form>
+    {% endif %}
+
+    <p>You can find the documentation <a href="/api">here</a>.</p>
+    <form action="/logout" method="POST">
+        <input type="hidden" name="csrf_token" value="{{csrf_token()}}">
+        <input type="submit" value="Logout">
+    </form>
+</body>
+
+</html>

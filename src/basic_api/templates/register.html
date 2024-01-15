@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register</title>
+    <link rel="stylesheet" href="/static/styles/default.css">
+</head>
+<body>
+    <h1>Register</h1>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        <ul class=flashes>
+        {% for category, message in messages %}
+        <li class="{{ category }}">{{ message }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+    {% endwith %}
+    <form action="/register" method="POST">
+        {{ form.hidden_tag() }}
+        {{ form.username.label }}<br>{{ form.username(size=20) }}
+        {% for error in form.username.errors %}
+            <span style="color: red;">{{ error }}</span>
+        {% endfor %}<br>
+        {{ form.password.label }}<br>{{ form.password(size=20) }}
+        {% for error in form.password.errors %}
+            <span style="color: red;">{{ error }}</span>
+        {% endfor %}<br>
+        {{ form.confirm_password.label }}<br>{{ form.confirm_password(size=20) }}
+        {% for error in form.confirm_password.errors %}
+            <span style="color: red;">{{ error }}</span>
+        {% endfor %}<br>
+        {{ form.submit }}
+    </form>
+    <p>Already have an account? <a href="/login">login</a> </p>
+</body>
+</html>
